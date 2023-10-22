@@ -6,7 +6,7 @@
 </div>
 
 @if(session()->has('success'))
-  <div class="alert alert-success" role="alert">
+  <div class="alert alert-success col-lg-8" role="alert">
     {{ session('success') }}
   </div>
 @endif
@@ -32,12 +32,16 @@
             <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info">
                 <i class="bi bi-eye-fill"></i>
             </a>
-            <a href="" class="badge bg-warning">
+            <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning">
                 <i class="bi bi-pencil-square"></i>
             </a>
-            <a href="" class="badge bg-danger">
+            <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline">
+              @method('delete')
+              @csrf
+              <button class="badge bg-danger border-0" onclick="return confirm('Are you sure ?')">
                 <i class="bi bi-x-circle"></i>
-            </a>
+              </button>
+            </form>
           </td>
         </tr>       
         @endforeach
